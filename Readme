@@ -1,0 +1,24 @@
+# 执行流程
+BIOS 加载扇区1 从0到 0x7C00
+        │
+        ▼
+实模式执行：
+1. 启用 A20
+2. 设置视频模式
+3. 保存启动盘号
+4. 读取扇区1-6到 copy_target
+5. 进入保护模式
+        │
+        ▼
+保护模式执行：
+1. 显示 "Hello more than 512 bytes world!!"
+2. 设置内核栈（16KB）
+3. 调用外部 C 函数 kmain()
+        │
+        ▼
+C 语言内核（需要另外编写）：
+- kmain() 函数在 C 文件中实现
+- 内核入口点
+
+# Resource
+http://3zanders.co.uk/2017/10/13/writing-a-bootloader/
